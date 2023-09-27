@@ -1,0 +1,47 @@
+[versions]
+minSdk = "23"
+compileSdk = "34"
+targetSdk = "34"
+
+gradlePlugin = "8.1.0"
+kotlin = "1.9.10"
+ksp = "1.9.10-1.0.13"
+
+androidx-core = "1.12.0"
+androidx-appcompat = "1.6.1"
+androidx-room = "2.5.2"
+androidx-test-ext-junit = "1.1.5"
+dagger = "2.48"
+material = "1.9.0"
+coroutines = "1.7.3"
+retrofit = "2.9.0"
+junit = "4.13.2"
+espresso-core = "3.5.1"
+
+[libraries]
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room"}
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room"}
+androidx-room-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room"}
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines"}
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines"}
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger"}
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger"}
+material = { module = "com.google.android.material:material", version.ref = "material"}
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit"}
+junit = { module = "junit:junit", version.ref = "junit"}
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+
+[bundles]
+androidx = ["androidx-core", "androidx-appcompat"]
+coroutines = ["kotlinx-coroutines-core", "kotlinx-coroutines-android"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "gradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "gradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
