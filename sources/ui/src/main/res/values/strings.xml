@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="send_button_text">Send</string>
+    <string name="text_field_hint">Message</string>
+    <string name="search_button">Search</string>
+    <string name="channel_info_image_button">Channel info image button</string>
+    <string name="attached_image">Attached image</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="sign_up_button">Sign Up</string>
+</resources>

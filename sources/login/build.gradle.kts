@@ -1,11 +1,11 @@
 plugins {
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.example.login"
+    namespace = "com.example.profile"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -24,19 +24,64 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        compose = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
+
     kotlinOptions {
         jvmTarget = "17"
     }
 }
 
 dependencies {
-    implementation(libs.bundles.androidx)
+
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
+
+    implementation(projects.sources.network)
+    implementation(projects.sources.ui)
+    api(projects.sources.coreApi)
+
+    //Coroutines
+    implementation(libs.bundles.coroutines)
+
+    //MVIOrbit
+    implementation(libs.mvi.orbit.core)
+    implementation(libs.mvi.orbit.compose)
+    implementation(libs.mvi.orbit.viewmodel)
+    testImplementation(libs.mvi.orbit.test)
+
+    //Dagger
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
+
+    //Compose
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.foundation.layout)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }

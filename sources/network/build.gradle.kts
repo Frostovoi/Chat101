@@ -1,11 +1,12 @@
 plugins {
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.example.core.api"
+    namespace = "com.example.network"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -34,13 +35,23 @@ android {
 }
 
 dependencies {
-    implementation(libs.bundles.androidx)
+
+    api(projects.sources.coreApi)
+
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    //Room
-    implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
+    //Ktor
+    implementation(libs.bundles.ktor)
 
+    //Serialization
+    implementation(libs.kotlinx.serialization)
+
+    //Dagger
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
 }
