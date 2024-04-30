@@ -37,6 +37,10 @@ android {
 }
 
 dependencies {
+
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
     implementation (libs.bundles.androidx)
     testImplementation(libs.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
