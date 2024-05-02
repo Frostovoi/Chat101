@@ -27,12 +27,22 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 }
 
@@ -46,12 +56,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation(projects.sources.register)
-    implementation(projects.sources.login)
     implementation(projects.sources.main)
     implementation(projects.sources.coreFactory)
 
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
 
+    // Compose
+    implementation(libs.androidx.activity.compose)
 }

@@ -47,6 +47,10 @@ android {
 dependencies {
 
     implementation(project(":sources:core_api"))
+    implementation(project(":sources:ui"))
+    implementation(project(":sources:login"))
+    implementation(project(":sources:register"))
+
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
@@ -65,6 +69,7 @@ dependencies {
     ksp(libs.dagger.compiler)
 
     //Compose
+    implementation(libs.androidx.compose.navigation)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
