@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/sources/profile" />
             <option value="$PROJECT_DIR$/sources/register" />
             <option value="$PROJECT_DIR$/sources/ui" />
+            <option value="$PROJECT_DIR$/tdlib" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

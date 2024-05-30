@@ -18,7 +18,10 @@ fun Navigation(){
             startDestination = Screens.LOGIN
         ){
             composable(Screens.LOGIN) {
-                LoginContent( onSignUpPressed = { navController.navigate(Screens.SIGN_UP)})
+                LoginContent(
+                    onSignInPressed = {},
+                    onSignUpPressed = { navController.navigate(Screens.SIGN_UP)},
+                )
             }
             composable(Screens.SIGN_UP) {
                 Register()

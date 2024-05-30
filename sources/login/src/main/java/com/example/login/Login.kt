@@ -1,5 +1,6 @@
 package com.example.login
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,17 +33,26 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ui.theme.ChatTheme
 import com.example.ui.theme.Red80
 import com.example.ui.theme.Violet
+import tdLib.AuthState
 
 
 @Composable
 fun LoginContent(
     modifier: Modifier = Modifier,
     onSignInPressed: () -> Unit = {},
-    onSignUpPressed: () -> Unit = {}
+    onSignUpPressed: () -> Unit = {},
 ) {
+
+    val viewModel: LoginViewModel = viewModel()
+    val authState = viewModel.authState.collectAsState(initial = AuthState.Initial)
+    viewModel.performAuthResult()
+    println(authState)
+    Log.e("LoginContent",authState.toString() )
+
     Box(modifier = modifier.fillMaxSize()){
 
         Image(
@@ -60,13 +71,13 @@ fun LoginContent(
         ) {
 
             val textFieldShape = RoundedCornerShape(30.dp)
-            var loginTextField by remember { mutableStateOf("") }
-            var passwordTextField by remember { mutableStateOf("") }
+            var phoneTextField by remember { mutableStateOf("") }
+            var codeTextField by remember { mutableStateOf("") }
 
             OutlinedTextField(
 
-                value = loginTextField,
-                onValueChange = { loginTextField = it},
+                value = phoneTextField,
+                onValueChange = { phoneTextField = it},
                 modifier = Modifier
                     .padding(bottom = 12.dp)
                     .background(
@@ -75,15 +86,15 @@ fun LoginContent(
                     ),
                 shape = textFieldShape,
                 placeholder = {
-                    Text("Enter your Login")
+                    Text("Enter your telephone number")
                 }
             )
 
             OutlinedTextField(
-                value = passwordTextField,
-                onValueChange = { passwordTextField = it},
+                value = codeTextField,
+                onValueChange = { codeTextField = it},
                 placeholder = {
-                    Text("Enter your Password")
+                    Text("Enter the code")
                 },
                 modifier = Modifier.background(
                     color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
@@ -109,14 +120,15 @@ fun LoginContent(
                     defaultElevation = 30.dp,
                     pressedElevation = 10.dp
                 )
-
                 ElevatedButton(
-                    onClick = onSignInPressed,
+                    onClick = {
+                            viewModel.sendPhone(phoneTextField)
+                              },
                     colors = buttonColors,
                     elevation = buttonElevation
                 ) {
                     Text(
-                        text = stringResource(id = com.example.ui.R.string.sign_in_button),
+                        text = stringResource(id = com.example.ui.R.string.send_code),
                         fontSize = 16.sp,
                     )
                 }
@@ -124,13 +136,13 @@ fun LoginContent(
                 Spacer(modifier = Modifier.padding(16.dp))
 
                 ElevatedButton(
-                    onClick = onSignUpPressed,
+                    onClick = { viewModel.sendCode(codeTextField)},
                     colors = buttonColors,
                     elevation = buttonElevation
                 )
                 {
                     Text(
-                        text = stringResource(id = com.example.ui.R.string.sign_up_button),
+                        text = stringResource(id = com.example.ui.R.string.sign_in_button),
                         fontSize = 16.sp
                     )
                 }
@@ -144,7 +156,7 @@ fun LoginContent(
 @Composable
 fun LoginContentPreview() {
     ChatTheme {
-        LoginContent()
+        //LoginContent()
     }
 }
 

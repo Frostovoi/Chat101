@@ -58,6 +58,7 @@ dependencies {
 
     implementation(projects.sources.network)
     implementation(projects.sources.ui)
+    implementation(projects.tdlib)
     api(projects.sources.coreApi)
 
     //Coroutines
@@ -74,6 +75,7 @@ dependencies {
     ksp(libs.dagger.compiler)
 
     //Compose
+    implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
