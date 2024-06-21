@@ -1,6 +1,5 @@
 package com.example.login
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +32,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ui.theme.ChatTheme
 import com.example.ui.theme.Red80
 import com.example.ui.theme.Violet
@@ -43,15 +41,15 @@ import tdLib.AuthState
 @Composable
 fun LoginContent(
     modifier: Modifier = Modifier,
+    viewModel: LoginViewModel,
     onSignInPressed: () -> Unit = {},
     onSignUpPressed: () -> Unit = {},
 ) {
 
-    val viewModel: LoginViewModel = viewModel()
+
     val authState = viewModel.authState.collectAsState(initial = AuthState.Initial)
     viewModel.performAuthResult()
-    println(authState)
-    Log.e("LoginContent",authState.toString() )
+
 
     Box(modifier = modifier.fillMaxSize()){
 
@@ -122,7 +120,7 @@ fun LoginContent(
                 )
                 ElevatedButton(
                     onClick = {
-                            viewModel.sendPhone(phoneTextField)
+                        viewModel.sendPhone(phoneTextField)
                               },
                     colors = buttonColors,
                     elevation = buttonElevation
@@ -136,7 +134,9 @@ fun LoginContent(
                 Spacer(modifier = Modifier.padding(16.dp))
 
                 ElevatedButton(
-                    onClick = { viewModel.sendCode(codeTextField)},
+                    onClick = {
+                        viewModel.sendCode(codeTextField)
+                    },
                     colors = buttonColors,
                     elevation = buttonElevation
                 )

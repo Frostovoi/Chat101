@@ -1,8 +1,24 @@
 package com.example.login.di
 
+import com.example.login.LoginViewModel
 import dagger.Component
-import javax.inject.Singleton
+import javax.inject.Scope
 
-@Singleton
-@Component
-interface LoginComponent
+
+@Scope
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+annotation class LoginScope
+
+@Component(
+    modules = [LoginModule::class]
+)
+@LoginScope
+interface LoginComponent {
+
+    @Component.Builder
+    interface Builder {
+        fun build(): LoginComponent
+    }
+
+    fun getViewModel(): LoginViewModel
+}

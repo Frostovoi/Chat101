@@ -27,7 +27,7 @@ class TelegramRepository @Inject constructor (private val context: Context) : Us
 
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
     override val api: TelegramFlow = TelegramFlow()
-
+    
     private val authFlow = api.authorizationStateFlow()
         .onEach {
             println("state: " + it.toString())

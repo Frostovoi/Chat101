@@ -2,10 +2,10 @@ package com.example.chat101
 
 import android.app.Application
 import com.example.core.api.database.DatabaseProvider
-import dagger.Component
 import com.example.core.api.mediator.AppProvider
 import com.example.core.api.mediator.ProvidersFacade
 import com.example.core.factory.CoreProvidersFactory
+import dagger.Component
 
 
 @Component(

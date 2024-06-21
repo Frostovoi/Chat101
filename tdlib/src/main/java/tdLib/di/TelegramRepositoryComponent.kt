@@ -1,14 +1,28 @@
 package tdLib.di
 
-import com.example.core.api.mediator.AppProvider
+import android.content.Context
+import dagger.BindsInstance
 import dagger.Component
 import tdLib.TelegramRepository
-import javax.inject.Singleton
 
-@Singleton
-@Component (
-    dependencies = [AppProvider::class])
-interface TelegramRepositoryComponent{
+@Component
+interface TelegramRepositoryComponent {
 
-    fun repository() : TelegramRepository
+
+    fun telegramRepository(): TelegramRepository
+
+
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance context: Context): TelegramRepositoryComponent
+    }
+
+
+
+//
+//    companion object {
+//        fun init(context: Context): TelegramRepositoryComponent {
+//            return DaggerTelegramRepositoryComponent.factory().create(context)
+//        }
+//    }
 }
